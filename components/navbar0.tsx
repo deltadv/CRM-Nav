@@ -6,9 +6,25 @@ import logo from "@/public/ptdi.png";
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownAircraft, setDropdownAircraft] = useState(false);
+  const [dropdownCustomer, setDropdownCustomer] = useState(false);
+
+  const CustomerDropdown = () => {
+    setDropdownCustomer(!dropdownCustomer);
+    setDropdownAircraft(false);
+    setDropdownOpen(false);
+  };
+
+  const AircraftDropdown = () => {
+    setDropdownAircraft(!dropdownAircraft);
+    setDropdownCustomer(false);
+    setDropdownOpen(false);
+  };
 
   const ServiceDropdown = () => {
     setDropdownOpen(!dropdownOpen);
+    setDropdownAircraft(false);
+    setDropdownCustomer(false);
   };
 
   const toggleMobileMenu = () => {
@@ -59,29 +75,47 @@ export default function Navbar() {
         >
           <ul className="flex flex-col md:text-left sm:text-left p-4 md:p-5 lg:p-0 md:mt-5 lg:mt-0 mt-4 md:flex-col lg:flex-row md:space-y-5 lg:space-y-0 lg:space-x-8 bg-gray-900 lg:bg-gray-900 ">
             <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
-                aria-current="page"
-              >
-                Customer
-              </a>
+            <button onMouseOver={CustomerDropdown} id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4  text-white md:hover:text-blue-500 md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Customer <svg className="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+  </svg></button>
+            {/* <!-- Dropdown menu --> */}
+            {dropdownCustomer && (
+            <div id="dropdownNavbar" className="absolute z-10 font-normal shadow w-44 dark:bg-gray-700 dark:divide-gray-600 bg-gray-800 border-t-4 mt-5">
+                <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-white dark:hover:text-white text-white">Dashboard</a>
+                  </li>
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-white dark:hover:text-white text-white">Settings</a>
+                  </li>
+                </ul>
+            </div>
+            )}
             </li>
             <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
-                aria-current="page"
-              >
-                Aircraft
-              </a>
+            <button onMouseOver={AircraftDropdown} id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 pl-3 pr-4  text-white md:hover:text-blue-500 md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Aircraft <svg className="w-2.5 h-2.5 ml-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
+  </svg></button>
+            {/* <!-- Dropdown menu --> */}
+            {dropdownAircraft && (
+            <div id="dropdownNavbar" className="absolute z-10 font-normal shadow w-44 dark:bg-gray-700 dark:divide-gray-600 bg-gray-800 border-t-4 mt-5">
+                <ul className="py-2 text-sm text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-white dark:hover:text-white text-white">Dashboard</a>
+                  </li>
+                  <li>
+                    <a href="#" className="block px-4 py-2 hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-white dark:hover:text-white text-white">Settings</a>
+                  </li>
+                </ul>
+            </div>
+            )}
             </li>
             <li>
               <button
                 id="mega-menu-full-dropdown-button"
                 data-collapse-toggle="mega-menu-full-dropdown"
-                className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded md:w-auto md:border-0 md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
-                onClick={ServiceDropdown}
+                className="flex items-center justify-between w-full py-2 pl-3 pr-4 text-gray-900 rounded md:w-auto md:border-0 md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
+                onMouseOver={ServiceDropdown}
               >
                 Services
                 <svg
@@ -104,7 +138,7 @@ export default function Navbar() {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
+                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
               >
                 Scheduled Maintenance Level
               </a>
@@ -112,7 +146,7 @@ export default function Navbar() {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
+                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
               >
                 Certificates
               </a>
@@ -120,33 +154,9 @@ export default function Navbar() {
             <li>
               <a
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
+                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
               >
-                Home
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
-              >
-                Gallery
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
-              >
-                Contact Us
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded md:p-0 dark:text-white md:hover:text-blue-500 hover:bg-gray-700 hover:text-blue-500 md:hover:bg-transparent border-gray-700"
-              >
-                Login
+                -
               </a>
             </li>
           </ul>
@@ -155,7 +165,7 @@ export default function Navbar() {
       {dropdownOpen && (
         <div
           id="mega-menu-full-dropdown"
-          className="mt-1 shadow-sm md:bg-gray-800 border-y bg-gray-800 border-gray-600"
+          className="mt-1 shadow-sm md:bg-gray-800 border-t-4"
         >
           <div className="grid max-w-screen-xl px-4 py-5 mx-auto text-white sm:grid-cols-2 md:px-6">
             <ul>
@@ -196,7 +206,7 @@ export default function Navbar() {
               <li>
                 <a href="#" className="block p-3 rounded-lg hover:bg-gray-700">
                   <div className="font-semibold">Segmentation</div>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="text-sm text-gray-500 text-gray-400">
                     Connect with third-party tools that you're already using.
                   </span>
                 </a>
